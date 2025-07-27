@@ -4,8 +4,10 @@ weather:
 
 spring:
   cache:
-    type: simple
-
+    type: caffeine
+    cache-names: weather
+    caffeine:
+      spec: maximumSize=1000,expireAfterWrite=30m
 
 logging:
   level:
