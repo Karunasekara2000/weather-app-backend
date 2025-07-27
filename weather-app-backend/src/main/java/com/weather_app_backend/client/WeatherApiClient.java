@@ -1,9 +1,7 @@
 package com.weather_app_backend.client;
 
-import com.weather_app_backend.model.Weather;
 import com.weather_app_backend.model.dto.WeatherDto;
 import com.weather_app_backend.model.dto.WeatherInfoDto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;

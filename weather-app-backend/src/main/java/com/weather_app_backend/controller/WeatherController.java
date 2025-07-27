@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.CompletableFuture;
+
 @RestController
 @RequestMapping("/weather")
 public class WeatherController {
@@ -20,8 +22,9 @@ public class WeatherController {
     }
 
     @GetMapping
-    public ResponseEntity<Weather> getWeatherSummary(@RequestParam String city){
-
-        return ResponseEntity.ok(weatherService.getWeatherSummary(city));
+    public CompletableFuture<ResponseEntity<Weather>> getWeatherSummary(@RequestParam String city) {
+        return weatherService.getWeatherSummaryAsync(city)
+                .thenApply(ResponseEntity::ok);
     }
+
 }

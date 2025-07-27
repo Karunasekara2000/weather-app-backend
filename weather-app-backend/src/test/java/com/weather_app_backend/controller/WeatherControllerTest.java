@@ -8,6 +8,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -24,7 +27,7 @@ public class WeatherControllerTest {
     }
 
     @Test
-    public void testGetWeatherSummary_ReturnsWeather() {
+    public void testGetWeatherSummary_ReturnsWeather() throws ExecutionException, InterruptedException {
         String city = "London";
         Weather mockWeather = new Weather();
         mockWeather.setCity(city);
@@ -32,7 +35,8 @@ public class WeatherControllerTest {
 
         when(weatherService.getWeatherSummary(city)).thenReturn(mockWeather);
 
-        ResponseEntity<Weather> response = weatherController.getWeatherSummary(city);
+        CompletableFuture<ResponseEntity<Weather>> futureResponse = weatherController.getWeatherSummary(city);
+        ResponseEntity<Weather> response = futureResponse.get();
 
         assertEquals(200, response.getStatusCodeValue());
         assertEquals(city, response.getBody().getCity());
