@@ -2,4 +2,13 @@ weather:
   api:
     key: 6adf29405276de04c28203706e99fd56
 
+spring:
+  cache:
+    type: simple
 
+
+logging:
+  level:
+    org:
+      springframework:
+        cache=DEBUG:
