@@ -20,4 +20,12 @@ public class WeatherInfoDto {
     private String dateTime;
     private MainWeatherDto main;
 
+    //For test cases
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MainWeatherDto {
+        private double temp;
+    }
 }
